@@ -4,6 +4,7 @@ import com.employeemanager.employeemanager.exception.UserNotFoundException;
 import com.employeemanager.employeemanager.model.Employee;
 import com.employeemanager.employeemanager.repo.EmployeeRepo;
 import com.employeemanager.employeemanager.service.EmployeeService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User By Id " + id + "was not found"));
     }
-
+    @Transactional
     public void deleteEmployee(Long id){
         employeeRepo.deleteEmployeeById(id);
     }

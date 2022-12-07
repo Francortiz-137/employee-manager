@@ -2,6 +2,7 @@ package com.employeemanager.employeemanager.controller;
 
 import com.employeemanager.employeemanager.model.Employee;
 import com.employeemanager.employeemanager.service.EmployeeService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
+@CrossOrigin
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -42,6 +44,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);
